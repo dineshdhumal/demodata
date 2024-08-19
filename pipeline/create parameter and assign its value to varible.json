@@ -1,0 +1,67 @@
+{
+	"name": "create parameter and assign its value to varible",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Emp_name",
+					"value": {
+						"value": "@pipeline().parameters.Name",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Emp_ID",
+					"value": {
+						"value": "@pipeline().parameters.Roll_number",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"Name": {
+				"type": "string"
+			},
+			"Roll_number": {
+				"type": "int"
+			}
+		},
+		"variables": {
+			"Emp_name": {
+				"type": "String"
+			},
+			"Emp_ID": {
+				"type": "Integer"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-08-04T05:54:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
